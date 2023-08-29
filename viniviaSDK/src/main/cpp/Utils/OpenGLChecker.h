@@ -3,21 +3,17 @@
 
 #include <string>
 
-#ifdef NDEBUG
-#define VINIVIA_CHECK_GL(gl_func) [&]() { return gl_func; }()
-#else
-
 namespace ViniviaSDK
 {
-    class CheckGlErrorOnExit {
+    class OpenGLChecker {
     public:
-        explicit CheckGlErrorOnExit(std::string glFunStr, unsigned int lineNum);
+        explicit OpenGLChecker(std::string glFunStr, unsigned int lineNum);
 
-        ~CheckGlErrorOnExit();
+        ~OpenGLChecker();
 
-        CheckGlErrorOnExit(const CheckGlErrorOnExit &) = delete;
+        OpenGLChecker(const OpenGLChecker &) = delete;
 
-        CheckGlErrorOnExit &operator=(const CheckGlErrorOnExit &) = delete;
+        OpenGLChecker &operator=(const OpenGLChecker &) = delete;
 
     private:
         std::string mGlFunStr;
@@ -28,9 +24,8 @@ namespace ViniviaSDK
 
 #define VINIVIA_CHECK_GL(glFunc)                                            \
   [&]() {                                                                   \
-    auto assertOnExit = ViniviaSDK::CheckGlErrorOnExit(#glFunc, __LINE__);              \
+    auto assertOnExit = ViniviaSDK::OpenGLChecker(#glFunc, __LINE__);       \
     return glFunc;                                                          \
   }()
-#endif
 
 #endif  // VINIVIA_OPENGL_CHECKER_H

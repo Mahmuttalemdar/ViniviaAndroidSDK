@@ -346,12 +346,16 @@ class ViniviaMainActivity : AppCompatActivity() {
             ActivityResultContracts.RequestMultiplePermissions(),
             ActivityResultCallback<Map<String, Boolean>> { result ->
                 for (permission: String? in REQUIRED_PERMISSIONS) {
-                    if (!Objects.requireNonNull(result[permission])!!) {
-                        Toast.makeText(
-                            this@ViniviaMainActivity, "Permissions not granted",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        finish()
+
+                    val res : Boolean? = Objects.requireNonNull(result[permission])
+                    res.let {
+                        if (!(it)!!) {
+                            Toast.makeText(
+                                this@ViniviaMainActivity, "Permissions not granted",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                        }
                     }
                 }
 

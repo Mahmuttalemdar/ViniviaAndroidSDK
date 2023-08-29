@@ -16,9 +16,16 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
         externalNativeBuild {
             cmake {
-                cppFlags += "-std=c++17"
+                cppFlags("-std=c++17 -fexceptions -Wno-format -Wno-unused-variable")
+                arguments(
+                    "-DCMAKE_VERBOSE_MAKEFILE=ON",
+                    "-DPROJECT_ROOT_DIR=" + project.rootDir.toString(),
+                    "-DANDROID_TOOLCHAIN=clang",
+                    "-DANDROID_NATIVE_API_LEVEL=android-24"
+                )
             }
         }
     }
@@ -72,6 +79,9 @@ dependencies {
     implementation("android.arch.navigation:navigation-ui-ktx:1.0.0")
     implementation("androidx.test.espresso:espresso-idling-resource:3.5.1")
     implementation("com.google.firebase:firebase-crashlytics-buildtools:2.9.9")
+    implementation("androidx.test:monitor:1.6.1")
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
 
     testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("junit:junit:4.12")
 }
