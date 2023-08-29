@@ -62,7 +62,7 @@ class ViniviaRenderer {
             surfaceRequest.provideSurface(
                 inputSurface,
                 mExecutor
-            ) { result: SurfaceRequest.Result? ->
+            ) {
                 inputSurface.release()
                 surfaceTexture.release()
                 if (surfaceTexture === mPreviewTexture) {

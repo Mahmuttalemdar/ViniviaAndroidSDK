@@ -1,12 +1,13 @@
 # This workflow to help you automate your building process
 
-name: Build Gradle
+name: Integrate Firebase Distributions + Github Actions
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   pull_request_target:
     branches: [ main ]
+
 
 
 jobs:
@@ -29,3 +30,12 @@ jobs:
         with:
           name: app
           path: app/build/outputs/apk/debug/app-debug.apk
+          
+      - name: Upload Artifact To Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
+        with:
+          appId: ${{ secrets.FIREBASE_ID }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
+          groups: Android-CICD-Testers
+          releaseNotes: "Hey! This my first integrate Firebase distributions with Github Actions"
+          file: app/build/outputs/apk/debug/app-debug.apk   

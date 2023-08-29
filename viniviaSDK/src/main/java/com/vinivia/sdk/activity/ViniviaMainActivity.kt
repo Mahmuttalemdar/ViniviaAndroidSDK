@@ -110,7 +110,7 @@ class ViniviaMainActivity : AppCompatActivity() {
         // Create new dynamic view stub for renderer
         createNewViewStub()
         val viewFinderStub = findViewById<ViewStub>(R.id.viewFinderStub)
-        val viewFinder = mRenderer?.let {
+        mRenderer?.let {
             chooseViewFinder(
                 intent.extras, viewFinderStub,
                 it
@@ -173,42 +173,24 @@ class ViniviaMainActivity : AppCompatActivity() {
     }
 
     private fun setupActionButtons() {
-        var fab_main_button: FloatingActionButton? = null
-
-        // Sub-action buttons
-        var fab_no_filter_button: FloatingActionButton? = null
-        var fab_grayscale_filter_button: FloatingActionButton? = null
-        var fab_cube_filter_button: FloatingActionButton? = null
-        var fab_cube_with_depth_map_filter_button: FloatingActionButton? = null
-        var fab_depth_map_filter_button: FloatingActionButton? = null
-        var fab_negative_filter_button: FloatingActionButton? = null
-
-        // Sub-action text
-        var fab_no_filter_action_text: TextView? = null
-        var fab_grayscale_filter_action_text: TextView? = null
-        var fab_cube_filter_action_text: TextView? = null
-        var fab_cube_with_depth_map_filter_action_text: TextView? = null
-        var fab_depth_map_filter_action_text: TextView? = null
-        var fab_negative_filter_action_text: TextView? = null
-
-        var isAllFabsVisible: Boolean? = null
+        var isAllFabsVisible: Boolean?
 
         // Get action buttons
-        fab_main_button = findViewById<FloatingActionButton>(R.id.fab_main_button)
-        fab_no_filter_button = findViewById<FloatingActionButton>(R.id.fab_no_filter_button)
-        fab_grayscale_filter_button = findViewById<FloatingActionButton>(R.id.fab_grayscale_filter_button)
-        fab_cube_filter_button = findViewById<FloatingActionButton>(R.id.fab_cube_filter_button)
-        fab_cube_with_depth_map_filter_button = findViewById<FloatingActionButton>(R.id.fab_cube_with_depth_map_filter_button)
-        fab_depth_map_filter_button = findViewById<FloatingActionButton>(R.id.fab_depth_map_filter_button)
-        fab_negative_filter_button = findViewById<FloatingActionButton>(R.id.fab_negative_filter_button)
+        var fab_main_button: FloatingActionButton? = findViewById<FloatingActionButton>(R.id.fab_main_button)
+        var fab_no_filter_button: FloatingActionButton? = findViewById<FloatingActionButton>(R.id.fab_no_filter_button)
+        var fab_grayscale_filter_button: FloatingActionButton? = findViewById<FloatingActionButton>(R.id.fab_grayscale_filter_button)
+        var fab_cube_filter_button: FloatingActionButton? = findViewById<FloatingActionButton>(R.id.fab_cube_filter_button)
+        var fab_cube_with_depth_map_filter_button: FloatingActionButton? = findViewById<FloatingActionButton>(R.id.fab_cube_with_depth_map_filter_button)
+        var fab_depth_map_filter_button: FloatingActionButton? = findViewById<FloatingActionButton>(R.id.fab_depth_map_filter_button)
+        var fab_negative_filter_button: FloatingActionButton? = findViewById<FloatingActionButton>(R.id.fab_negative_filter_button)
 
         // Get action texts
-        fab_no_filter_action_text = findViewById<TextView>(R.id.fab_no_filter_action_text)
-        fab_grayscale_filter_action_text = findViewById<TextView>(R.id.fab_grayscale_filter_action_text)
-        fab_cube_filter_action_text = findViewById<TextView>(R.id.fab_cube_filter_action_text)
-        fab_cube_with_depth_map_filter_action_text = findViewById<TextView>(R.id.fab_cube_with_depth_map_filter_action_text)
-        fab_depth_map_filter_action_text = findViewById<TextView>(R.id.fab_depth_map_filter_action_text)
-        fab_negative_filter_action_text = findViewById<TextView>(R.id.fab_negative_filter_action_text)
+        var fab_no_filter_action_text: TextView? = findViewById<TextView>(R.id.fab_no_filter_action_text)
+        var fab_grayscale_filter_action_text: TextView? = findViewById<TextView>(R.id.fab_grayscale_filter_action_text)
+        var fab_cube_filter_action_text: TextView? = findViewById<TextView>(R.id.fab_cube_filter_action_text)
+        var fab_cube_with_depth_map_filter_action_text: TextView? = findViewById<TextView>(R.id.fab_cube_with_depth_map_filter_action_text)
+        var fab_depth_map_filter_action_text: TextView? = findViewById<TextView>(R.id.fab_depth_map_filter_action_text)
+        var fab_negative_filter_action_text: TextView? = findViewById<TextView>(R.id.fab_negative_filter_action_text)
 
         // Set invisible all elements
         fab_no_filter_button!!.visibility = View.GONE
@@ -230,48 +212,48 @@ class ViniviaMainActivity : AppCompatActivity() {
 
         fun toggle() {
             isAllFabsVisible = if (!isAllFabsVisible!!) {
-                fab_no_filter_button!!.show()
-                fab_grayscale_filter_button!!.show()
-                fab_cube_filter_button!!.show()
-                fab_cube_with_depth_map_filter_button!!.show()
-                fab_depth_map_filter_button!!.show()
-                fab_negative_filter_button!!.show()
+                fab_no_filter_button.show()
+                fab_grayscale_filter_button.show()
+                fab_cube_filter_button.show()
+                fab_cube_with_depth_map_filter_button.show()
+                fab_depth_map_filter_button.show()
+                fab_negative_filter_button.show()
 
-                fab_no_filter_action_text!!.visibility = View.VISIBLE
-                fab_grayscale_filter_action_text!!.visibility = View.VISIBLE
-                fab_cube_filter_action_text!!.visibility = View.VISIBLE
-                fab_cube_with_depth_map_filter_action_text!!.visibility = View.VISIBLE
-                fab_depth_map_filter_action_text!!.visibility = View.VISIBLE
-                fab_negative_filter_action_text!!.visibility = View.VISIBLE
+                fab_no_filter_action_text.visibility = View.VISIBLE
+                fab_grayscale_filter_action_text.visibility = View.VISIBLE
+                fab_cube_filter_action_text.visibility = View.VISIBLE
+                fab_cube_with_depth_map_filter_action_text.visibility = View.VISIBLE
+                fab_depth_map_filter_action_text.visibility = View.VISIBLE
+                fab_negative_filter_action_text.visibility = View.VISIBLE
 
                 true
             } else {
-                fab_no_filter_button!!.hide()
-                fab_grayscale_filter_button!!.hide()
-                fab_cube_filter_button!!.hide()
-                fab_cube_with_depth_map_filter_button!!.hide()
-                fab_depth_map_filter_button!!.hide()
-                fab_negative_filter_button!!.hide()
+                fab_no_filter_button.hide()
+                fab_grayscale_filter_button.hide()
+                fab_cube_filter_button.hide()
+                fab_cube_with_depth_map_filter_button.hide()
+                fab_depth_map_filter_button.hide()
+                fab_negative_filter_button.hide()
 
 
-                fab_no_filter_action_text!!.visibility = View.GONE
-                fab_grayscale_filter_action_text!!.visibility = View.GONE
-                fab_cube_filter_action_text!!.visibility = View.GONE
-                fab_cube_with_depth_map_filter_action_text!!.visibility = View.GONE
-                fab_depth_map_filter_action_text!!.visibility = View.GONE
-                fab_negative_filter_action_text!!.visibility = View.GONE
+                fab_no_filter_action_text.visibility = View.GONE
+                fab_grayscale_filter_action_text.visibility = View.GONE
+                fab_cube_filter_action_text.visibility = View.GONE
+                fab_cube_with_depth_map_filter_action_text.visibility = View.GONE
+                fab_depth_map_filter_action_text.visibility = View.GONE
+                fab_negative_filter_action_text.visibility = View.GONE
                 false
             }
         }
 
 
-        fab_main_button!!.setOnClickListener(View.OnClickListener { view: View? ->
+        fab_main_button!!.setOnClickListener(View.OnClickListener {
             toggle()
         })
 
 
-        fab_no_filter_button!!.setOnClickListener(
-            View.OnClickListener { view: View? ->
+        fab_no_filter_button.setOnClickListener(
+            View.OnClickListener {
                 Toast.makeText(
                     this@ViniviaMainActivity, "Filter changed to No Filter", Toast.LENGTH_SHORT
                 ).show()
@@ -279,8 +261,8 @@ class ViniviaMainActivity : AppCompatActivity() {
                 toggle()
             })
 
-        fab_grayscale_filter_button!!.setOnClickListener(
-            View.OnClickListener { view: View? ->
+        fab_grayscale_filter_button.setOnClickListener(
+            View.OnClickListener {
                 Toast.makeText(
                     this@ViniviaMainActivity, "Filter changed to Grayscale Filter", Toast.LENGTH_SHORT
                 ).show()
@@ -288,8 +270,8 @@ class ViniviaMainActivity : AppCompatActivity() {
                 toggle()
             })
 
-        fab_cube_filter_button!!.setOnClickListener(
-            View.OnClickListener { view: View? ->
+        fab_cube_filter_button.setOnClickListener(
+            View.OnClickListener {
                 Toast.makeText(
                     this@ViniviaMainActivity, "Filter changed to Cube Filter", Toast.LENGTH_SHORT
                 ).show()
@@ -297,8 +279,8 @@ class ViniviaMainActivity : AppCompatActivity() {
                 toggle()
             })
 
-        fab_cube_with_depth_map_filter_button!!.setOnClickListener(
-            View.OnClickListener { view: View? ->
+        fab_cube_with_depth_map_filter_button.setOnClickListener(
+            View.OnClickListener {
                 Toast.makeText(
                     this@ViniviaMainActivity, "Filter changed to Cube With Depth Map Filter", Toast.LENGTH_SHORT
                 ).show()
@@ -306,8 +288,8 @@ class ViniviaMainActivity : AppCompatActivity() {
                 toggle()
             })
 
-        fab_depth_map_filter_button!!.setOnClickListener(
-            View.OnClickListener { view: View? ->
+        fab_depth_map_filter_button.setOnClickListener(
+            View.OnClickListener {
                 Toast.makeText(
                     this@ViniviaMainActivity, "Filter changed to Depth Map Filter", Toast.LENGTH_SHORT
                 ).show()
@@ -315,8 +297,8 @@ class ViniviaMainActivity : AppCompatActivity() {
                 toggle()
             })
 
-        fab_negative_filter_button!!.setOnClickListener(
-            View.OnClickListener { view: View? ->
+        fab_negative_filter_button.setOnClickListener(
+            View.OnClickListener {
                 Toast.makeText(
                     this@ViniviaMainActivity, "Filter changed to Negative Filter", Toast.LENGTH_SHORT
                 ).show()
