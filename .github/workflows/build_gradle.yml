@@ -1,6 +1,6 @@
 # This workflow to help you automate your building process
 
-name: Deploy APK + Github Actions
+name: Build & Deploy APK
 
 # Controls when the workflow will run
 on:
@@ -27,11 +27,5 @@ jobs:
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: app
-          path: app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: ViniviaAndroidSDK-Apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: viniviaSDK
+          path: viniviaSDK/build/outputs/apk/debug/viniviaSDK-debug.apk
