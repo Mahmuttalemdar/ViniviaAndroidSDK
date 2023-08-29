@@ -1,0 +1,31 @@
+# This workflow to help you automate your building process
+
+name: Build Gradle
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  pull_request_target:
+    branches: [ main ]
+
+
+jobs:
+  builds:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: Setup Java JDK
+        uses: actions/setup-java@v1
+        with:
+         java-version: 1.8
+        
+      - name: Build Gradle
+        run: ./gradlew build
+    
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: app
+          path: app/build/outputs/apk/debug/app-debug.apk
