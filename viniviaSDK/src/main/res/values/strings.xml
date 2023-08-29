@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ViniviaAndroidSDK</string>
+    <string name="switch_camera_button_alt">Switch camera</string>
+    <string name="fps_counter_template">%1$s fps</string>
+</resources>

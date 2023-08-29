@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  Copyright 2020 The Android Open Source Project
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ViewStub
+        android:id="@+id/viewFinderStub"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:inflatedId="@id/viewFinder"
+        android:translationZ="-2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="H, 9:16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Fab Main Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_main_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="48dp"
+        android:backgroundTint="#EB1B70"
+        app:borderWidth="0dp"
+        android:src="@drawable/ic_vinivia_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Fab No Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_no_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#4477CE"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_main_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_main_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_main_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab No Filter Text -->
+    <TextView
+        android:id="@+id/fab_no_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#4477CE"
+        android:text="No Filter"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textColor="#ededed"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_no_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_no_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_no_filter_button" />
+
+
+    <!-- Fab Grayscale Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_grayscale_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#EBE76C"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_no_filter_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_no_filter_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_no_filter_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab Grayscale Filter Text -->
+    <TextView
+        android:id="@+id/fab_grayscale_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#EBE76C"
+        android:text="Grayscale Filter"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_grayscale_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_grayscale_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_grayscale_filter_button" />
+
+
+    <!-- Fab Cube Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cube_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#A8DF8E"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_grayscale_filter_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_grayscale_filter_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_grayscale_filter_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab Cube Filter Text -->
+    <TextView
+        android:id="@+id/fab_cube_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#A8DF8E"
+        android:text="Cube Filter"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_cube_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_cube_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_cube_filter_button" />
+
+    <!-- Fab Cube With Depth Map Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cube_with_depth_map_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#C23373"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_cube_filter_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_cube_filter_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_cube_filter_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab Cube With Depth Map Filter Text -->
+    <TextView
+        android:id="@+id/fab_cube_with_depth_map_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#C23373"
+        android:text="Cube With Depth Map Filter"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textColor="#ededed"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_cube_with_depth_map_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_cube_with_depth_map_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_cube_with_depth_map_filter_button" />
+
+    <!-- Fab Depth Map Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_depth_map_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#7091F5"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_cube_with_depth_map_filter_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_cube_with_depth_map_filter_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_cube_with_depth_map_filter_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab Depth Map Filter Text -->
+    <TextView
+        android:id="@+id/fab_depth_map_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#7091F5"
+        android:text="Depth Map Filter"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_depth_map_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_depth_map_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_depth_map_filter_button" />
+
+    <!-- Fab Negative Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_negative_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="#E4A5FF"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_depth_map_filter_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_depth_map_filter_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_depth_map_filter_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab Negative Filter Text -->
+    <TextView
+        android:id="@+id/fab_negative_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#E4A5FF"
+        android:text="Negative Filter"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textColor="#000000"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_negative_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_negative_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_negative_filter_button" />
+
+
+    <!-- FPS Recorder Layout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="179dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:background="#EB1B70"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fps_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:text="--- fps"
+            android:textColor="#FFFFFF"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
