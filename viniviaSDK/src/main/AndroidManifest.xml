@@ -43,7 +43,6 @@
             android:theme="@style/Theme.ViniviaAndroidSDK"
             android:icon="@drawable/ic_launcher"
             android:screenOrientation="fullUser"
-            android:rotationAnimation="seamless"
             android:resizeableActivity="true"
             android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize"
             android:exported="true">

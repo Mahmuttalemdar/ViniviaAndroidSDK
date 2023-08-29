@@ -20,7 +20,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@v1
         with:
-         java-version: 1.8
+         java-version: 17
         
       - name: Build Gradle
         run: ./gradlew build

@@ -66,8 +66,8 @@ dependencies {
 
     implementation("com.google.guava:guava:31.0.1-android")
     implementation("androidx.concurrent:concurrent-futures:1.1.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.6.0")
 
+    implementation("androidx.navigation:navigation-runtime-ktx:2.0.0")
     implementation("android.arch.navigation:navigation-fragment-ktx:1.0.0")
     implementation("android.arch.navigation:navigation-ui-ktx:1.0.0")
     implementation("androidx.test.espresso:espresso-idling-resource:3.5.1")
