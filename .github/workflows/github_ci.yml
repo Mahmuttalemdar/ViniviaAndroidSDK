@@ -54,7 +54,7 @@ jobs: # groups the jobs to be executed in this workflow
         uses: actions/upload-artifact@v2 # Uses upload-artifact@v2 action to upload lint report artifact
         with: # Define extra parameters
           name: lint_report.html # Name of the artifact to be uploaded
-          path: app/build/reports/lint-results-debug.html # Specifies the path where the artifact to be uploaded is located
+          path: viniviaSDK/build/reports/lint-results-debug.html # Specifies the path where the artifact to be uploaded is located
 
 
   unit-tests: #Defines another job called unit tests
@@ -79,7 +79,7 @@ jobs: # groups the jobs to be executed in this workflow
         uses: actions/upload-artifact@v2
         with:
           name: unit_tests_report.html
-          path: app/build/reports/tests/testDebugUnitTest/
+          path: viniviaSDK/build/reports/tests/testDebugUnitTest/
 
 
   generate-apk: # Job to generate debug apk
