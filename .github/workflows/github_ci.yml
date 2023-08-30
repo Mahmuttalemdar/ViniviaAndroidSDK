@@ -123,8 +123,8 @@ jobs: # groups the jobs to be executed in this workflow
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.1
-          release_name: Release v1.1
+          tag_name: v1.2
+          release_name: ViniviaSDK v1.2
 
       - name: Upload Release APK
         id: upload_release_asset
@@ -133,7 +133,7 @@ jobs: # groups the jobs to be executed in this workflow
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ViniviaSDK/app-debug.apk
+          asset_path: ViniviaSDK/viniviaSDK-debug.apk
           asset_name: ViniviaSDK.apk
           asset_content_type: application/zip
 
