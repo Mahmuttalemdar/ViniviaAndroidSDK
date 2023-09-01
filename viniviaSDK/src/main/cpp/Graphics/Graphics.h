@@ -20,10 +20,12 @@ namespace ViniviaSDK
         EGLSurface pbufferSurface;
         GLuint program;
         GLint positionHandle;
-        GLint samplerHandle;
+        GLint normalTextureHandle;
+        GLint maskTextureHandle;
         GLint vertTransformHandle;
         GLint texTransformHandle;
-        GLuint textureId;
+        GLuint maskTextureId;
+        GLuint normalTextureId;
 
         NativeContext(EGLDisplay display, EGLConfig config, EGLContext context,
                       ANativeWindow *window, EGLSurface surface,
@@ -35,10 +37,12 @@ namespace ViniviaSDK
                   pbufferSurface(pbufferSurface),
                   program(0),
                   positionHandle(-1),
-                  samplerHandle(-1),
+                  normalTextureHandle(-1),
+                  maskTextureHandle(-1),
                   vertTransformHandle(-1),
                   texTransformHandle(-1),
-                  textureId(0) {}
+                  maskTextureId(2),
+                  normalTextureId(1) {}
     };
 
     /**

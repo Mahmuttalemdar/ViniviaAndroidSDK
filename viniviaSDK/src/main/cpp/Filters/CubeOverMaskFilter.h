@@ -1,20 +1,18 @@
-#ifndef VINIVIA_SDK_CUBE_WITH_DM_FILTER_H
-#define VINIVIA_SDK_CUBE_WITH_DM_FILTER_H
+#ifndef VINIVIA_SDK_CUBE_WITH_MASK_FILTER_H
+#define VINIVIA_SDK_CUBE_WITH_MASK_FILTER_H
 
 #include "BaseFilter.h"
+#include "Filters/PositiveMaskFilter.h"
 #include "Graphics/Graphics.h"
-#include "Filters/CubeFilter.h"
-#include "Filters/DepthMapFilter.h"
 #include "Log/Log.h"
 #include "Utils/OpenGLChecker.h"
-#include "Utils/Matrix.h"
-#include "Shapes/Cube.h"
 
 #include <cassert>
 
+
 namespace ViniviaSDK
 {
-    namespace Filters::CubeWithDepthMapFilter
+    namespace Filters::CubeOverMaskFilter
     {
         // Vertex Shader for Cube
         constexpr char VERTEX_SHADER_SRC[] = R"SRC(
@@ -39,17 +37,17 @@ namespace ViniviaSDK
         )SRC";
     }
 
-    class CubeWithDepthMapFilter : public BaseFilter {
+    class CubeOverMaskFilter : public BaseFilter {
     public:
         /**
          * C-tor
          */
-        CubeWithDepthMapFilter() : BaseFilter() {}
+        CubeOverMaskFilter() : BaseFilter() {}
 
         /**
          * D-tor
          */
-        ~CubeWithDepthMapFilter() override {}
+        ~CubeOverMaskFilter() override {}
 
         /**
          * Apply no-filter to current opengl context
@@ -64,28 +62,44 @@ namespace ViniviaSDK
                 return 0;
             }
 
+            // Enable blend operations for the masking
+            VINIVIA_CHECK_GL(glEnable(GL_BLEND));
+            // Use a simple blendfunc for drawing the background
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            // Create sahder program
             nativeContext->program = Graphics::CreateGLProgram(
-                    ViniviaSDK::Filters::DepthMapFilter::VERTEX_SHADER_SRC,
-                    ViniviaSDK::Filters::DepthMapFilter::FRAGMENT_SHADER_SRC);
+                    ViniviaSDK::Filters::PositiveMaskFilter::VERTEX_SHADER_SRC,
+                    ViniviaSDK::Filters::PositiveMaskFilter::FRAGMENT_SHADER_SRC);
             assert(nativeContext->program);
 
+            // Position
             nativeContext->positionHandle = VINIVIA_CHECK_GL(
                     glGetAttribLocation(nativeContext->program, "position"));
             assert(nativeContext->positionHandle != -1);
 
-            nativeContext->samplerHandle = VINIVIA_CHECK_GL(
-                    glGetUniformLocation(nativeContext->program, "sampler"));
-            assert(nativeContext->samplerHandle != -1);
+            // Sampler, External texture from camera
+            nativeContext->normalTextureHandle = VINIVIA_CHECK_GL(
+                    glGetUniformLocation(nativeContext->program, "normalTexture"));
+            assert(nativeContext->normalTextureHandle != -1);
 
+            // Mask from image
+            nativeContext->maskTextureHandle = VINIVIA_CHECK_GL(
+                    glGetUniformLocation(nativeContext->program, "maskTexture"));
+            assert(nativeContext->maskTextureHandle != -1);
+
+            // Vertex Transform Array
             nativeContext->vertTransformHandle = VINIVIA_CHECK_GL(
                     glGetUniformLocation(nativeContext->program, "vertTransform"));
             assert(nativeContext->vertTransformHandle != -1);
 
+            // Texture Transform Array
             nativeContext->texTransformHandle = VINIVIA_CHECK_GL(
                     glGetUniformLocation(nativeContext->program, "texTransform"));
             assert(nativeContext->texTransformHandle != -1);
 
-            VINIVIA_CHECK_GL(glGenTextures(1, &(nativeContext->textureId)));
+            // texture from native context
+            VINIVIA_CHECK_GL(glGenTextures(1, &(nativeContext->normalTextureId)));
 
             // Setup the perspective for 3D Cube.
             matrixPerspective(m_projectionMatrix, 45.0f, (float) 3 / (float) 4, 0.1f, 100.0f);
@@ -105,6 +119,11 @@ namespace ViniviaSDK
                 LOGE("RenderFilter failed; nativeContext is not valid.");
                 return 0;
             }
+            // Set Background (Black)
+            VINIVIA_CHECK_GL(glClearColor(0.0f, 0.0f, 0.0f, 1.0f));
+
+            // Clear color and depth values
+            VINIVIA_CHECK_GL(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 
             // Image vertices
             constexpr GLfloat vertices[] = {-1.0f, -1.0f, 3.0f, -1.0f, -1.0f, 3.0f};
@@ -148,20 +167,51 @@ namespace ViniviaSDK
                                                JNI_ABORT);
             }
 
-            // Set Texture position to 0
-            VINIVIA_CHECK_GL(glUniform1i(nativeContext->samplerHandle, 0));
+            // Bind Normal Texture
+            bindNormalTexture(nativeContext);
 
-            // Bind Texture
-            VINIVIA_CHECK_GL(glBindTexture(GL_TEXTURE_EXTERNAL_OES, nativeContext->textureId));
+            // Bind Mask Texture
+            bindMaskTexture(nativeContext);
 
-            // Draw Arrays
-            VINIVIA_CHECK_GL(glDrawArrays(GL_TRIANGLES, 0, 3));
+            // Do all draw operations
+            drawTextures();
 
+            // Disable Blend
+            VINIVIA_CHECK_GL(glDisable(GL_BLEND));
+
+            // Render cube
             return RenderCube(env, reinterpret_cast<jlong>(nativeContext), vertexTransformArray,
                               textureTransformArray);
         }
 
     private:
+        void bindNormalTexture(NativeContext *nativeContext) {
+            // Set Normal Texture position to 1
+            VINIVIA_CHECK_GL(glUniform1i(nativeContext->normalTextureHandle, 0));
+
+            // Set active texture 1
+            VINIVIA_CHECK_GL(glActiveTexture(GL_TEXTURE0));
+
+            // Bind Texture
+            VINIVIA_CHECK_GL(glBindTexture(GL_TEXTURE_EXTERNAL_OES, nativeContext->normalTextureId));
+        }
+
+        void bindMaskTexture(NativeContext *nativeContext) {
+            // Set Mask Texture position to 0
+            VINIVIA_CHECK_GL(glUniform1i(nativeContext->maskTextureHandle, 1));
+
+            // Set active texture 0
+            VINIVIA_CHECK_GL(glActiveTexture(GL_TEXTURE1));
+
+            // Bind Texture
+            VINIVIA_CHECK_GL(glBindTexture(GL_TEXTURE_EXTERNAL_OES, nativeContext->maskTextureId));
+        }
+
+        void drawTextures() {
+            // Draw
+            VINIVIA_CHECK_GL(glDrawArrays(GL_TRIANGLES, 0, 3));
+        }
+
         /**
          * Render filter and bind texture to openGl
          * @param nativeContext
@@ -294,4 +344,4 @@ namespace ViniviaSDK
 
 }
 
-#endif //VINIVIA_SDK_CUBE_WITH_DM_FILTER_H
+#endif //VINIVIA_SDK_CUBE_WITH_MASK_FILTER_H

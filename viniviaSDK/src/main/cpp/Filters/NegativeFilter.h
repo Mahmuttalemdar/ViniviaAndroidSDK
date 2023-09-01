@@ -79,8 +79,8 @@ namespace ViniviaSDK
             assert(nativeContext->positionHandle != -1);
 
             // Sampler, External texture from camera
-            nativeContext->samplerHandle = VINIVIA_CHECK_GL(glGetUniformLocation(nativeContext->program, "sampler"));
-            assert(nativeContext->samplerHandle != -1);
+            nativeContext->normalTextureHandle = VINIVIA_CHECK_GL(glGetUniformLocation(nativeContext->program, "sampler"));
+            assert(nativeContext->normalTextureHandle != -1);
 
             // Vertex Transform Array
             nativeContext->vertTransformHandle = VINIVIA_CHECK_GL(glGetUniformLocation(nativeContext->program, "vertTransform"));
@@ -91,7 +91,7 @@ namespace ViniviaSDK
             assert(nativeContext->texTransformHandle != -1);
 
             // texture from native context
-            VINIVIA_CHECK_GL(glGenTextures(1, &(nativeContext->textureId)));
+            VINIVIA_CHECK_GL(glGenTextures(1, &(nativeContext->normalTextureId)));
 
             return reinterpret_cast<jlong>(nativeContext);
         }
@@ -152,10 +152,10 @@ namespace ViniviaSDK
             }
 
             // Set Texture position to 0
-            VINIVIA_CHECK_GL(glUniform1i(nativeContext->samplerHandle, 0));
+            VINIVIA_CHECK_GL(glUniform1i(nativeContext->normalTextureHandle, 0));
 
             // Bind Texture
-            VINIVIA_CHECK_GL(glBindTexture(GL_TEXTURE_EXTERNAL_OES, nativeContext->textureId));
+            VINIVIA_CHECK_GL(glBindTexture(GL_TEXTURE_EXTERNAL_OES, nativeContext->normalTextureId));
 
             // Draw
             VINIVIA_CHECK_GL(glDrawArrays(GL_TRIANGLES, 0, 3));

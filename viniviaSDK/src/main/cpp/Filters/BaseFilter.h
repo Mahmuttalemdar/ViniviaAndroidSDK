@@ -9,9 +9,11 @@ namespace ViniviaSDK
         NO_FILTER = 0,
         GRAYSCALE_FILTER,
         CUBE_FILTER,
-        CUBE_WITH_DEPTH_MAP_FILTER,
         DEPTH_MAP_FILTER,
-        NEGATIVE_FILTER
+        NEGATIVE_FILTER,
+        POSITIVE_MASK_FILTER,
+        NEGATIVE_MASK_FILTER,
+        CUBE_OVER_MASK_FILTER
     };
 
     class BaseFilter {

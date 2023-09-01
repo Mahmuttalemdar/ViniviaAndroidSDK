@@ -1,5 +1,6 @@
 package com.vinivia.sdk.core
 
+import android.graphics.Bitmap
 import android.graphics.SurfaceTexture
 import android.opengl.Matrix
 import android.os.Process
@@ -14,6 +15,7 @@ import androidx.core.util.Consumer
 import androidx.core.util.Pair
 import com.google.common.util.concurrent.ListenableFuture
 import com.vinivia.sdk.api.ViniviaSDK
+import com.vinivia.sdk.utils.ImageUtils
 import java.util.Locale
 import java.util.concurrent.Executor
 import java.util.concurrent.RejectedExecutionException
@@ -94,6 +96,20 @@ class ViniviaRenderer {
             }
         } catch (e: RejectedExecutionException) {
             // Renderer is shutting down. Ignore.
+        }
+    }
+
+
+    fun setMask(mask: Bitmap) {
+        try {
+            mExecutor.execute {
+                if (mNativeContext == 0L) {
+                    mNativeContext = ViniviaSDK.initializeContext()
+                }
+                ViniviaSDK.setMask(mNativeContext, mask)
+            }
+        } catch (e: RejectedExecutionException) {
+
         }
     }
 

@@ -6,6 +6,7 @@
 #include "Filters/GrayscaleFilter.h"
 #include "Filters/NegativeFilter.h"
 
+#include <android/bitmap.h>
 #include <android/native_window.h>
 #include <android/native_window_jni.h>
 
@@ -129,7 +130,6 @@ namespace ViniviaSDK {
         }
 
 // Only attempt to set presentation time if EGL_EGLEXT_PROTOTYPES is defined.
-// Otherwise, we'll ignore the timestamp.
 #ifdef EGL_EGLEXT_PROTOTYPES
         eglPresentationTimeANDROID(nativeContext->display,
                                nativeContext->windowSurface.second, timestampNs);
@@ -180,8 +180,43 @@ namespace ViniviaSDK {
         return JNI_TRUE;
     }
 
+    jboolean RendererES2::SetMask(JNIEnv *env, jlong context, jobject mask) {
+        AndroidBitmapInfo bitmapInfo;
+        void *bitmapPixels;
+
+        if (AndroidBitmap_getInfo(env, mask, &bitmapInfo) < 0) {
+            LOGE("Failed to set mask : Unable to access bitmapInfo.");
+            return JNI_FALSE;
+        }
+
+        if (AndroidBitmap_lockPixels(env, mask, &bitmapPixels) < 0) {
+            LOGE("Failed to set mask : Unable to access bitmapPixels.");
+            return JNI_FALSE;
+        }
+        auto *nativeContext = reinterpret_cast<NativeContext *>(context);
+
+        if (!nativeContext) {
+            LOGE("Failed to set mask : Unable to access nativeContext.");
+            return JNI_FALSE;
+        }
+
+        // Remove old mask
+        glDeleteTextures(1, &nativeContext->maskTextureId);
+
+        // Create OpenGL Texture
+        glGenTextures(1, &nativeContext->maskTextureId);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, bitmapInfo.width, bitmapInfo.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, bitmapPixels);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+        AndroidBitmap_unlockPixels(env, mask);
+        return JNI_TRUE;
+    }
+
     jint RendererES2::GetTextureID(jlong context) {
         auto *nativeContext = reinterpret_cast<NativeContext *>(context);
-        return nativeContext->textureId;
+        return nativeContext->normalTextureId;
     }
+
+
 }

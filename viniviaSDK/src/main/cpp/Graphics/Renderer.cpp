@@ -3,9 +3,11 @@
 #include "Filters/NoFilter.h"
 #include "Filters/GrayscaleFilter.h"
 #include "Filters/CubeFilter.h"
-#include "Filters/CubeWithDepthMapFilter.h"
 #include "Filters/DepthMapFilter.h"
 #include "Filters/NegativeFilter.h"
+#include "Filters/PositiveMaskFilter.h"
+#include "Filters/NegativeMaskFilter.h"
+#include "Filters/CubeOverMaskFilter.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -31,14 +33,21 @@ namespace ViniviaSDK
             case Filter::CUBE_FILTER:
                 m_shaderFilter.reset(new CubeFilter());
                 break;
-            case Filter::CUBE_WITH_DEPTH_MAP_FILTER:
-                m_shaderFilter.reset(new CubeWithDepthMapFilter());
-                break;
             case Filter::DEPTH_MAP_FILTER:
                 m_shaderFilter.reset(new DepthMapFilter());
                 break;
             case Filter::NEGATIVE_FILTER:
                 m_shaderFilter.reset(new NegativeFilter());
+                break;
+            case Filter::POSITIVE_MASK_FILTER:
+                m_shaderFilter.reset(new PositiveMaskFilter());
+                break;
+            case Filter::NEGATIVE_MASK_FILTER:
+                m_shaderFilter.reset(new NegativeMaskFilter());
+                break;
+            case Filter::CUBE_OVER_MASK_FILTER:
+                m_shaderFilter.reset(new CubeOverMaskFilter());
+                break;
                 break;
             default:
                 m_shaderFilter.reset(new NoFilter());

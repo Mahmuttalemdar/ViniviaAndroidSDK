@@ -1,7 +1,9 @@
 package com.vinivia.sdk.api
 
+import android.graphics.Bitmap
 import android.view.Surface
 import androidx.annotation.WorkerThread
+
 
 // Wrapper for native library
 object ViniviaSDK {
@@ -13,9 +15,11 @@ object ViniviaSDK {
         NO_FILTER,
         GRAYSCALE_FILTER,
         CUBE_FILTER,
-        CUBE_WITH_DEPTH_MAP_FILTER,
         DEPTH_MAP_FILTER,
-        NEGATIVE_FILTER
+        NEGATIVE_FILTER,
+        POSITIVE_MASK_FILTER,
+        NEGATIVE_MASK_FILTER,
+        CUBE_OVER_MASK_FILTER
     }
 
     @WorkerThread
@@ -40,4 +44,7 @@ object ViniviaSDK {
 
     @WorkerThread
     external fun changeActiveFilter(filter: Filter)
+
+    @WorkerThread
+    external fun setMask(nativeContext: Long, mask: Bitmap)
 }

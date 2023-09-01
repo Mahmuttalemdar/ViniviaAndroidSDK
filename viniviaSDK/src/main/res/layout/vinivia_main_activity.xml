@@ -21,6 +21,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- OpenGL Draw Area -->
     <ViewStub
         android:id="@+id/viewFinderStub"
         android:layout_width="0dp"
@@ -36,13 +37,14 @@
     <!-- Fab Main Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_main_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="48dp"
         android:backgroundTint="#EB1B70"
-        app:borderWidth="0dp"
         android:src="@drawable/ic_vinivia_logo"
+        app:borderWidth="0dp"
+        app:fabCustomSize="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -51,7 +53,7 @@
         android:id="@+id/fab_no_filter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/margin_floatButton"
         android:backgroundTint="#4477CE"
         app:borderWidth="0dp"
         app:fabSize="normal"
@@ -86,7 +88,7 @@
         android:id="@+id/fab_grayscale_filter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="@dimen/margin_floatButton"
         android:backgroundTint="#EBE76C"
         app:borderWidth="0dp"
         app:fabSize="normal"
@@ -115,18 +117,53 @@
         app:layout_constraintTop_toTopOf="@+id/fab_grayscale_filter_button" />
 
 
-    <!-- Fab Cube Filter Button -->
+    <!-- Fab Negative Filter Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_cube_filter_button"
+        android:id="@+id/fab_negative_filter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#A8DF8E"
+        android:layout_marginBottom="@dimen/margin_floatButton"
+        android:backgroundTint="#871F78"
         app:borderWidth="0dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/fab_grayscale_filter_button"
         app:layout_constraintEnd_toEndOf="@+id/fab_grayscale_filter_button"
         app:layout_constraintStart_toStartOf="@+id/fab_grayscale_filter_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab Negative Filter Text -->
+    <TextView
+        android:id="@+id/fab_negative_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#871F78"
+        android:text="Negative Filter"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:textColor="#FFFFFF"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_negative_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_negative_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_negative_filter_button" />
+
+
+    <!-- Fab Cube Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cube_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_floatButton"
+        android:backgroundTint="#A8DF8E"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_negative_filter_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_negative_filter_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_negative_filter_button"
         app:srcCompat="@drawable/ic_vinivia_logo" />
 
     <!-- Fab Cube Filter Text -->
@@ -148,13 +185,14 @@
         app:layout_constraintEnd_toStartOf="@+id/fab_cube_filter_button"
         app:layout_constraintTop_toTopOf="@+id/fab_cube_filter_button" />
 
+
     <!-- Fab Cube With Depth Map Filter Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_cube_with_depth_map_filter_button"
+        android:id="@+id/fab_depth_map_filter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#C23373"
+        android:layout_marginBottom="@dimen/margin_floatButton"
+        android:backgroundTint="#FFC6AC"
         app:borderWidth="0dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/fab_cube_filter_button"
@@ -164,40 +202,6 @@
 
     <!-- Fab Cube With Depth Map Filter Text -->
     <TextView
-        android:id="@+id/fab_cube_with_depth_map_filter_action_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="2dp"
-        android:paddingBottom="2dp"
-        android:background="#C23373"
-        android:text="Cube With Depth Map Filter"
-        android:textAlignment="center"
-        android:textSize="14sp"
-        android:textColor="#ededed"
-        android:translationZ="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fab_cube_with_depth_map_filter_button"
-        app:layout_constraintEnd_toStartOf="@+id/fab_cube_with_depth_map_filter_button"
-        app:layout_constraintTop_toTopOf="@+id/fab_cube_with_depth_map_filter_button" />
-
-    <!-- Fab Depth Map Filter Button -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_depth_map_filter_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#7091F5"
-        app:borderWidth="0dp"
-        app:fabSize="normal"
-        app:layout_constraintBottom_toTopOf="@+id/fab_cube_with_depth_map_filter_button"
-        app:layout_constraintEnd_toEndOf="@+id/fab_cube_with_depth_map_filter_button"
-        app:layout_constraintStart_toStartOf="@+id/fab_cube_with_depth_map_filter_button"
-        app:srcCompat="@drawable/ic_vinivia_logo" />
-
-    <!-- Fab Depth Map Filter Text -->
-    <TextView
         android:id="@+id/fab_depth_map_filter_action_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -206,22 +210,24 @@
         android:paddingRight="8dp"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
-        android:background="#7091F5"
+        android:background="#FFC6AC"
         android:text="Depth Map Filter"
         android:textAlignment="center"
         android:textSize="14sp"
+        android:textColor="#000000"
         android:translationZ="15dp"
         app:layout_constraintBottom_toBottomOf="@+id/fab_depth_map_filter_button"
         app:layout_constraintEnd_toStartOf="@+id/fab_depth_map_filter_button"
         app:layout_constraintTop_toTopOf="@+id/fab_depth_map_filter_button" />
 
-    <!-- Fab Negative Filter Button -->
+
+    <!-- Fab Positive Mask Filter Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_negative_filter_button"
+        android:id="@+id/fab_positive_mask_filter_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:backgroundTint="#E4A5FF"
+        android:layout_marginBottom="@dimen/margin_floatButton"
+        android:backgroundTint="#088395"
         app:borderWidth="0dp"
         app:fabSize="normal"
         app:layout_constraintBottom_toTopOf="@+id/fab_depth_map_filter_button"
@@ -229,9 +235,9 @@
         app:layout_constraintStart_toStartOf="@+id/fab_depth_map_filter_button"
         app:srcCompat="@drawable/ic_vinivia_logo" />
 
-    <!-- Fab Negative Filter Text -->
+    <!-- Fab Positive Mask Filter Text -->
     <TextView
-        android:id="@+id/fab_negative_filter_action_text"
+        android:id="@+id/fab_positive_mask_filter_action_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -239,15 +245,85 @@
         android:paddingRight="8dp"
         android:paddingTop="2dp"
         android:paddingBottom="2dp"
-        android:background="#E4A5FF"
-        android:text="Negative Filter"
+        android:background="#088395"
+        android:text="Positive Mask"
+        android:textColor="#FFFFFF"
         android:textAlignment="center"
         android:textSize="14sp"
-        android:textColor="#000000"
         android:translationZ="15dp"
-        app:layout_constraintBottom_toBottomOf="@+id/fab_negative_filter_button"
-        app:layout_constraintEnd_toStartOf="@+id/fab_negative_filter_button"
-        app:layout_constraintTop_toTopOf="@+id/fab_negative_filter_button" />
+        app:layout_constraintBottom_toBottomOf="@+id/fab_positive_mask_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_positive_mask_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_positive_mask_filter_button" />
+
+
+    <!-- Fab Negative Mask Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_negative_mask_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_floatButton"
+        android:backgroundTint="#FF4F00"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_positive_mask_filter_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_positive_mask_filter_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_positive_mask_filter_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab Negative Mask Filter Text -->
+    <TextView
+        android:id="@+id/fab_negative_mask_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#FF4F00"
+        android:text="Negative Mask"
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_negative_mask_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_negative_mask_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_negative_mask_filter_button" />
+
+
+    <!-- Fab Cube Over Mask Filter Button -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_cube_over_mask_filter_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_floatButton"
+        android:backgroundTint="#635985"
+        app:borderWidth="0dp"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toTopOf="@+id/fab_negative_mask_filter_button"
+        app:layout_constraintEnd_toEndOf="@+id/fab_negative_mask_filter_button"
+        app:layout_constraintStart_toStartOf="@+id/fab_negative_mask_filter_button"
+        app:srcCompat="@drawable/ic_vinivia_logo" />
+
+    <!-- Fab Cube Over Mask Filter Text -->
+    <TextView
+        android:id="@+id/fab_cube_over_mask_filter_action_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#635985"
+        android:text="Cube Over Mask Filter"
+        android:textColor="#ededed"
+        android:textAlignment="center"
+        android:textSize="14sp"
+        android:translationZ="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/fab_cube_over_mask_filter_button"
+        app:layout_constraintEnd_toStartOf="@+id/fab_cube_over_mask_filter_button"
+        app:layout_constraintTop_toTopOf="@+id/fab_cube_over_mask_filter_button" />
 
 
     <!-- FPS Recorder Layout -->
@@ -257,6 +333,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="48dp"
         android:background="#EB1B70"
+        android:translationZ="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

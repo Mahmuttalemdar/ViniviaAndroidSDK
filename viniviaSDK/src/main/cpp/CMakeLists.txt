@@ -46,10 +46,12 @@ set(HEADERS
         ${CMAKE_SOURCE_DIR}/Filters/BaseFilter.h
         ${CMAKE_SOURCE_DIR}/Filters/NoFilter.h
         ${CMAKE_SOURCE_DIR}/Filters/CubeFilter.h
-        ${CMAKE_SOURCE_DIR}/Filters/CubeWithDepthMapFilter.h
         ${CMAKE_SOURCE_DIR}/Filters/DepthMapFilter.h
         ${CMAKE_SOURCE_DIR}/Filters/GrayscaleFilter.h
         ${CMAKE_SOURCE_DIR}/Filters/NegativeFilter.h
+        ${CMAKE_SOURCE_DIR}/Filters/PositiveMaskFilter.h
+        ${CMAKE_SOURCE_DIR}/Filters/NegativeMaskFilter.h
+        ${CMAKE_SOURCE_DIR}/Filters/CubeOverMaskFilter.h
         ${CMAKE_SOURCE_DIR}/Shapes/Cube.h
         )
 
@@ -75,6 +77,7 @@ find_library(log-lib log)
 find_library(android-lib android)
 find_library(opengl-lib GLESv2)
 find_library(egl-lib EGL)
+find_library(jnigraphics-lib jnigraphics)
 
 # -------------------------------------------------------------------------------------------------
 # Library dependencies
@@ -84,6 +87,7 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
         ${android-lib}
         ${opengl-lib}
         ${egl-lib}
+        ${jnigraphics-lib}
         )
 
 # -------------------------------------------------------------------------------------------------

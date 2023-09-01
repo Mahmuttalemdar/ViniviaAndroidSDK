@@ -71,9 +71,9 @@ namespace ViniviaSDK
                     glGetAttribLocation(nativeContext->program, "position"));
             assert(nativeContext->positionHandle != -1);
 
-            nativeContext->samplerHandle = VINIVIA_CHECK_GL(
+            nativeContext->normalTextureHandle = VINIVIA_CHECK_GL(
                     glGetUniformLocation(nativeContext->program, "sampler"));
-            assert(nativeContext->samplerHandle != -1);
+            assert(nativeContext->normalTextureHandle != -1);
 
             nativeContext->vertTransformHandle = VINIVIA_CHECK_GL(
                     glGetUniformLocation(nativeContext->program, "vertTransform"));
@@ -83,7 +83,7 @@ namespace ViniviaSDK
                     glGetUniformLocation(nativeContext->program, "texTransform"));
             assert(nativeContext->texTransformHandle != -1);
 
-            VINIVIA_CHECK_GL(glGenTextures(1, &(nativeContext->textureId)));
+            VINIVIA_CHECK_GL(glGenTextures(1, &(nativeContext->normalTextureId)));
 
             // Setup the perspective for 3D Cube.
             matrixPerspective(m_projectionMatrix, 45.0f, (float) 3 / (float) 4, 0.1f, 100.0f);
@@ -147,13 +147,13 @@ namespace ViniviaSDK
             }
 
             // Set Texture position to 0
-            VINIVIA_CHECK_GL(glUniform1i(nativeContext->samplerHandle, 0));
+            VINIVIA_CHECK_GL(glUniform1i(nativeContext->normalTextureHandle, 0));
 
             // Bind Texture
-            VINIVIA_CHECK_GL(glBindTexture(GL_TEXTURE_EXTERNAL_OES, nativeContext->textureId));
+            VINIVIA_CHECK_GL(glBindTexture(GL_TEXTURE_EXTERNAL_OES, nativeContext->normalTextureId));
 
             // Draw
-            glDrawArrays(GL_TRIANGLES, 0, 3);
+            VINIVIA_CHECK_GL(glDrawArrays(GL_TRIANGLES, 0, 3));
 
             return RenderCube(env, reinterpret_cast<jlong>(nativeContext), vertexTransformArray,
                               textureTransformArray);

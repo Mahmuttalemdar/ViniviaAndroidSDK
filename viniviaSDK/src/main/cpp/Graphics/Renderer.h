@@ -53,6 +53,15 @@ namespace ViniviaSDK
         virtual jboolean SetWindowSurface(JNIEnv *env, jlong context, jobject jSurface) = 0;
 
         /**
+         * Set mask for shader filters
+         * @param env
+         * @param context
+         * @param mask
+         * @return
+         */
+        virtual jboolean SetMask(JNIEnv *env, jlong context, jobject mask) = 0;
+
+        /**
          * Get current texture id
          * @param context
          * @return

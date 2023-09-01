@@ -43,6 +43,7 @@ JNIEXPORT jint JNICALL
 Java_com_vinivia_sdk_api_ViniviaSDK_getTexName(JNIEnv *env, jobject thiz, jlong native_context) {
     return ViniviaSDK::Entrance::getInstance()->getRenderer()->GetTextureID(native_context);
 }
+
 extern "C"
 JNIEXPORT void JNICALL
 Java_com_vinivia_sdk_api_ViniviaSDK_changeActiveFilter(JNIEnv *env, jobject thiz, jobject filter) {
@@ -60,14 +61,20 @@ Java_com_vinivia_sdk_api_ViniviaSDK_changeActiveFilter(JNIEnv *env, jobject thiz
     else if (std::string(enumNameStr) == "CUBE_FILTER") {
         nativeFilter = ViniviaSDK::Filter::CUBE_FILTER;
     }
-    else if (std::string(enumNameStr) == "CUBE_WITH_DEPTH_MAP_FILTER") {
-        nativeFilter = ViniviaSDK::Filter::CUBE_WITH_DEPTH_MAP_FILTER;
-    }
     else if (std::string(enumNameStr) == "DEPTH_MAP_FILTER") {
         nativeFilter = ViniviaSDK::Filter::DEPTH_MAP_FILTER;
     }
     else if (std::string(enumNameStr) == "NEGATIVE_FILTER") {
         nativeFilter = ViniviaSDK::Filter::NEGATIVE_FILTER;
+    }
+    else if (std::string(enumNameStr) == "POSITIVE_MASK_FILTER") {
+        nativeFilter = ViniviaSDK::Filter::POSITIVE_MASK_FILTER;
+    }
+    else if (std::string(enumNameStr) == "NEGATIVE_MASK_FILTER") {
+        nativeFilter = ViniviaSDK::Filter::NEGATIVE_MASK_FILTER;
+    }
+    else if (std::string(enumNameStr) == "CUBE_OVER_MASK_FILTER") {
+        nativeFilter = ViniviaSDK::Filter::CUBE_OVER_MASK_FILTER;
     }
     else {
         nativeFilter = ViniviaSDK::Filter::NO_FILTER;
@@ -76,4 +83,10 @@ Java_com_vinivia_sdk_api_ViniviaSDK_changeActiveFilter(JNIEnv *env, jobject thiz
     env->ReleaseStringUTFChars(enumName, enumNameStr);
 
     ViniviaSDK::Entrance::getInstance()->getRenderer()->SetFilter(nativeFilter);
+}
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_vinivia_sdk_api_ViniviaSDK_setMask(JNIEnv *env, jobject thiz, jlong native_context, jobject mask) {
+    ViniviaSDK::Entrance::getInstance()->getRenderer()->SetMask(env, native_context, mask);
 }
