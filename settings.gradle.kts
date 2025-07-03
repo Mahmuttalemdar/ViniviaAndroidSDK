@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "ViniviaAndroidSDK"
 include(":viniviaSDK")
+include(":compose-demo")

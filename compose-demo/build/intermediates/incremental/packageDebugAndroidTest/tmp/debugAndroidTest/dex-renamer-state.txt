@@ -1,0 +1,7 @@
+#Thu Jul 03 13:48:40 TRT 2025
+base.0=/Users/mahmutalemdar/Source/ViniviaAndroidSDK/compose-demo/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/classes.dex
+base.1=/Users/mahmutalemdar/Source/ViniviaAndroidSDK/compose-demo/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/0/classes.dex
+path.0=classes.dex
+path.1=0/classes.dex
+renamed.0=classes.dex
+renamed.1=classes2.dex

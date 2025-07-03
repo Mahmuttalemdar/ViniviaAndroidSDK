@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vinivia Compose Demo</string>
+    <string name="camera_permission_required">Camera permission is required to use this app</string>
+    <string name="initializing_camera">Initializing Camera...</string>
+    <string name="filters">Filters</string>
+    <string name="vinivia_camera_filters">Vinivia Camera Filters</string>
+</resources> 
