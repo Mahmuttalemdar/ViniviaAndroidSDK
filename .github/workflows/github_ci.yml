@@ -127,8 +127,8 @@ jobs: # groups the jobs to be executed in this workflow
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v1.3
-          release_name: ViniviaSDK v1.3
+          tag_name: v1.4.${{ github.run_number }}
+          release_name: ViniviaSDK v1.4.${{ github.run_number }}
 
       - name: Upload Release APK
         id: upload_release_asset
