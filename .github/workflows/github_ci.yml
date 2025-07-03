@@ -107,7 +107,7 @@ jobs: # groups the jobs to be executed in this workflow
         uses: actions/upload-artifact@v4
         with:
           name: ViniviaSDK
-          path: viniviaSDK/build/outputs/apk/debug/viniviaSDK-debug.apk
+          path: compose-demo/build/outputs/apk/debug/compose-demo-debug.apk
 
 
   create-release: # Job to create a new github release and upload the generated apk
@@ -137,7 +137,7 @@ jobs: # groups the jobs to be executed in this workflow
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ViniviaSDK/viniviaSDK-debug.apk
+          asset_path: compose-demo-debug.apk
           asset_name: ViniviaSDK.apk
           asset_content_type: application/zip
 
