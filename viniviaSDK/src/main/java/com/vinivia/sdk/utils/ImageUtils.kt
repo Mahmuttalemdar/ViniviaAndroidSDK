@@ -22,7 +22,7 @@ object ImageUtils {
     // Read Image from file
     fun readImageFromDisk(context: Context, fileName: String?): Bitmap? {
         return try {
-            val file = File(context.filesDir, fileName)
+            val file = File(context.filesDir, fileName ?: "")
             val inputStream = FileInputStream(file)
             val bitmap = BitmapFactory.decodeStream(inputStream)
             inputStream.close()
@@ -36,7 +36,7 @@ object ImageUtils {
     // Save Image to Memory
     fun saveImageToMemory(context: Context, fileName: String?, bitmap: Bitmap) {
         try {
-            val file = File(context.filesDir, fileName)
+            val file = File(context.filesDir, fileName ?: "")
             val outputStream = FileOutputStream(file)
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
             outputStream.flush()

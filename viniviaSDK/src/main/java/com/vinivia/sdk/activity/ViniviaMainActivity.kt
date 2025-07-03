@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.util.Size
 import android.view.View
 import android.view.ViewStub
 import android.view.WindowManager
@@ -23,6 +24,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.Preview
+import androidx.camera.core.resolutionselector.AspectRatioStrategy
+import androidx.camera.core.resolutionselector.ResolutionSelector
+import androidx.camera.core.resolutionselector.ResolutionStrategy
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -113,8 +117,17 @@ class ViniviaMainActivity : AppCompatActivity() {
         mRenderer = ViniviaRenderer()
         setupMask(this)
 
+        val resolutionSelector = ResolutionSelector.Builder()
+            .setResolutionStrategy(
+                ResolutionStrategy(
+                    Size(1920, 1080),
+                    ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
+                )
+            )
+            .setAspectRatioStrategy(AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
+            .build()
         // Get current preview
-        val preview = Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9).build()
+        val preview = Preview.Builder().setResolutionSelector(resolutionSelector).build()
         mRenderer?.attachInputPreview(preview)
 
         // Create new dynamic view stub for renderer
@@ -201,9 +214,7 @@ class ViniviaMainActivity : AppCompatActivity() {
             true
         )
 
-        if (rotatedMaskBitmap != null) {
-            mRenderer?.setMask(rotatedMaskBitmap)
-        }
+        mRenderer?.setMask(rotatedMaskBitmap)
     }
 
     private fun setupActionButtons() {
@@ -380,7 +391,16 @@ class ViniviaMainActivity : AppCompatActivity() {
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         // Set the aspect ratio of Preview to match the aspect ratio of the view finder (defined
         // with ConstraintLayout).
-        val preview = Preview.Builder().setTargetAspectRatio(AspectRatio.RATIO_16_9).build()
+        val resolutionSelector = ResolutionSelector.Builder()
+            .setResolutionStrategy(
+                ResolutionStrategy(
+                    Size(1920, 1080),
+                    ResolutionStrategy.FALLBACK_RULE_CLOSEST_HIGHER_THEN_LOWER
+                )
+            )
+            .setAspectRatioStrategy(AspectRatioStrategy.RATIO_16_9_FALLBACK_AUTO_STRATEGY)
+            .build()
+        val preview = Preview.Builder().setResolutionSelector(resolutionSelector).build()
         mRenderer?.attachInputPreview(preview)
         val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
         mCameraProvider!!.bindToLifecycle(this, cameraSelector, preview)

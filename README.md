@@ -1,5 +1,7 @@
 # ViniviaAndroidSDK
 
+[![Android CI/CD](https://github.com/Mahmuttalemdar/ViniviaAndroidSDK/actions/workflows/github_ci.yml/badge.svg?branch=main)](https://github.com/Mahmuttalemdar/ViniviaAndroidSDK/actions/workflows/github_ci.yml)
+
 A high-performance Android SDK for camera filtering and rendering with native C++/OpenGL ES integration.
 
 ## 🆕 NEW: Jetpack Compose Demo
@@ -81,5 +83,3 @@ The project uses the latest Android development tools and follows modern Android
 ---
 
 **Note**: This project demonstrates both traditional Android development (native SDK) and modern approaches (Jetpack Compose integration).
-
-[![Android CI/CD](https://github.com/Mahmuttalemdar/ViniviaAndroidSDK/actions/workflows/github_ci.yml/badge.svg?branch=main)](https://github.com/Mahmuttalemdar/ViniviaAndroidSDK/actions/workflows/github_ci.yml)

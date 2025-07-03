@@ -40,11 +40,9 @@ class CameraXViewModel(application: Application) : AndroidViewModel(application)
                         } catch (e: ExecutionException) {
                             if (e.cause !is CancellationException) {
                                 mProcessCameraProviderLiveData!!.value =
-                                    Objects.requireNonNull(e.cause)?.let {
-                                        CameraProviderResult.fromError(
-                                            it
-                                        )
-                                    }
+                                    CameraProviderResult.fromError(
+                                        e.cause ?: e
+                                    )
                             }
                         } catch (e: InterruptedException) {
                             throw AssertionError("Unexpected thread interrupt.", e)
