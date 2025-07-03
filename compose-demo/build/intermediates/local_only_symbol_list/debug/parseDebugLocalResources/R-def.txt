@@ -1,9 +1,0 @@
-R_DEF: Internal format may change without notice
-local
-color black
-color white
-string app_name
-string camera_permission_required
-string filters
-string initializing_camera
-string vinivia_camera_filters

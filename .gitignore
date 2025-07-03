@@ -1,15 +1,45 @@
+# ===============================
+# Android / Kotlin / Gradle .gitignore
+# Generated via GitHub's official template + custom entries
+# https://github.com/github/gitignore/blob/main/Android.gitignore
+# ===============================
+
+# IDEs & metadata
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+*.iws
+.vscode/
+
+# macOS / Windows OS files
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+Thumbs.db
+ehthumbs.db
+Icon?
+
+# Gradle & build cache
+.gradle/
+**/build/
+**/out/
+**/.cxx/
+
+# Local configuration
 local.properties
+
+# Proguard / R8
+*.mapping
+
+# Logs
+*.log
+
+# NDK object files
+**/obj/
+
+# Generated files
+*.apk
+*.aar
+
+# Kotlin modules
+*.kotlin_module
+
+# Misc
+captures/
